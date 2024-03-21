@@ -1,0 +1,131 @@
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 13
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABAES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'DATABAES' at line 1
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dbkuliah_yasser    |
+| dbti02             |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> USE dbkuliah_yasser;
+Database changed
+MariaDB [dbkuliah_yasser]> SHOW TABLES;
+Empty set (0.001 sec)
+
+MariaDB [dbkuliah_yasser]> CREATE TABLE jurusan(
+    -> id int primary key auto_increment,
+    -> nama varchar(30) not null unique);
+Query OK, 0 rows affected (0.043 sec)
+
+MariaDB [dbkuliah_yasser]> DESC jurusan;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nama  | varchar(30) | NO   | UNI | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+2 rows in set (0.017 sec)
+
+MariaDB [dbkuliah_yasser]> INSERT INTO jurusan(nama) VALUES
+    -> ('Teknik Informatika'),('Sistem Informasi'),('Bisnis Digital'),('Farmasi'),('Ilmu Gizi');
+Query OK, 5 rows affected (0.004 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [dbkuliah_yasser]> SHOW TABLES;
++---------------------------+
+| Tables_in_dbkuliah_yasser |
++---------------------------+
+| jurusan                   |
++---------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [dbkuliah_yasser]> SELECT * FROM jurusan;
++----+--------------------+
+| id | nama               |
++----+--------------------+
+|  3 | Bisnis Digital     |
+|  4 | Farmasi            |
+|  5 | Ilmu Gizi          |
+|  2 | Sistem Informasi   |
+|  1 | Teknik Informatika |
++----+--------------------+
+5 rows in set (0.000 sec)
+
+MariaDB [dbkuliah_yasser]> SHOW TABLES;
++---------------------------+
+| Tables_in_dbkuliah_yasser |
++---------------------------+
+| jurusan                   |
++---------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [dbkuliah_yasser]> CREATE TABLE mahasiswa(
+    -> id int primary key auto_increment not null,
+    -> nim int not null,
+    -> nama varchar(30) not null,
+    -> alamat varchar (30) not null,
+    -> idurusan int not null,
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 6
+MariaDB [dbkuliah_yasser]> CREATE TABLE mahasiswa(
+    -> id int primary key auto_increment not null,
+    -> nim int not null,
+    -> nama varchar(30) not null,
+    -> alamat varchar(30) not null,
+    -> idjurusan int not null,
+    -> foto varchar(30) not null);
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [dbkuliah_yasser]> SHOW TABLES;
++---------------------------+
+| Tables_in_dbkuliah_yasser |
++---------------------------+
+| jurusan                   |
+| mahasiswa                 |
++---------------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [dbkuliah_yasser]> DESC mahasiswa;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nim       | int(11)     | NO   |     | NULL    |                |
+| nama      | varchar(30) | NO   |     | NULL    |                |
+| alamat    | varchar(30) | NO   |     | NULL    |                |
+| idjurusan | int(11)     | NO   |     | NULL    |                |
+| foto      | varchar(30) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.024 sec)
+
+MariaDB [dbkuliah_yasser]> INSERT INTO mahasiswa(nim,nama,alamat,idjurusan,foto) VALUES
+    -> (0110223066,'YASSER FAJAR P','BOGOR-Klapanunggal',1,'ysr.jpg');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [dbkuliah_yasser]> SELECT * FROM mahasiswa;
++----+-----------+----------------+--------------------+-----------+---------+
+| id | nim       | nama           | alamat             | idjurusan | foto    |
++----+-----------+----------------+--------------------+-----------+---------+
+|  1 | 110223066 | YASSER FAJAR P | BOGOR-Klapanunggal |         1 | ysr.jpg |
++----+-----------+----------------+--------------------+-----------+---------+
+1 row in set (0.000 sec)
+
+MariaDB [dbkuliah_yasser]> \q
+Bye
